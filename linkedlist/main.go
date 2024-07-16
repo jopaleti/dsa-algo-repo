@@ -21,6 +21,7 @@ type linkedList struct {
 }
 
 // Defining the 4 methods of the linkedList struct
+
 func (l *linkedList) add(value int) {
 	newNode := new(node)
 	newNode.value = value
