@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Doubly linked list node
@@ -82,3 +83,40 @@ func (dll doublyLinkedList) get(value int) *node {
 }
 
 // String method for the doubly linked list to print its nodes
+func (dll doublyLinkedList) String() string {
+
+	// Define a string builder to capture the string value as we iterate through the linked list
+	sb := strings.Builder{}
+
+	for iterator := dll.head; iterator != nil; iterator = iterator.next {
+		sb.WriteString(fmt.Sprintf("%d", iterator.value))
+	}
+
+	return sb.String()
+
+}
+
+func main() {
+
+	dll := doublyLinkedList{}
+
+	// Add nodes
+	dll.add(1)
+	dll.add(2)
+	dll.add(3)
+	dll.add(4)
+	dll.add(5)
+
+	// Print initial list
+	fmt.Println("Initial List:", dll)
+
+	// Get node with data 5
+	fmt.Println("Get Node with value 5:", dll.get(5))
+
+	// Remove nodes
+	dll.remove(3)
+	dll.remove(1)
+
+	// Print updated list
+	fmt.Println("Updated List:", dll)
+}
