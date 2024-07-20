@@ -1,0 +1,20 @@
+Steps for the BFS Solution:
+
+### Initialize the BFS Queue:
+Start from the initial state "0000".
+Use a queue to keep track of states to be processed, starting with "0000".
+
+### Handle Deadends:
+Use a set to store deadend states for quick lookup.
+If the initial state "0000" is a deadend, return -1 immediately.
+
+### Visited States:
+Use a set to keep track of visited states to avoid processing the same state multiple times.
+
+### Process the Queue:
+For each state, generate its neighboring states by turning each wheel one slot up or down.
+If a neighboring state is the target, return the current number of steps + 1.
+If a neighboring state is not a deadend and has not been visited, mark it as visited and add it to the queue.
+
+### Termination:
+If the queue is exhausted and the target state is not reached, return -1.
