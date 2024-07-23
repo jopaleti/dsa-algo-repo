@@ -59,8 +59,47 @@ func (h *MinHeap) heapifyDown(index int) {
 	lastIndexToCheck := len(h.array) - 1
 	l, r := left(index), right(index)
 	childToCompare := 0
+
+	// Find the smallest of the left and right children
+	for l <= lastIndexToCheck {
+		if l == lastIndexToCheck {
+			childToCompare = l
+		} else if h.array[l] < h.array[r] {
+			childToCompare = l
+		} else {
+			childToCompare = r
+		}
+
+		// Swap the parent to with the smallest
+		if h.array[index] > h.array[childToCompare] {
+			h.swap(index, childToCompare)
+
+			// Update the indices that we are comparing
+			index = childToCompare
+			l, r = left(index), right(index)
+		} else {
+			return
+		}
+	}
+
 }
 
 func main() {
 
+	mh := &MinHeap{}
+	mh.insert(35)
+	mh.insert(11)
+	mh.insert(23)
+	mh.insert(25)
+	mh.insert(17)
+	mh.insert(19)
+	mh.insert(30)
+	mh.insert(15)
+	mh.insert(8)
+	mh.insert(22)
+	fmt.Println(mh.array)
+
+	removed := mh.remove()
+	fmt.Printf("\nRemoved %d \n", removed)
+	fmt.Println(mh.array)
 }
