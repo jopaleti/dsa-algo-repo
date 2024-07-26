@@ -1,4 +1,11 @@
+// Date: 2024/07/26
+// Author: Opaleti Oluwatobi
+// Description: This is a solution to the problem on Hackerrank called Jessie and Cookies
+// Check docs.md for more information about the problem and the solution
+
 package main
+
+import "fmt"
 
 // Defining the heap struct
 type MinHeap struct {
@@ -51,6 +58,18 @@ func (h *MinHeap) GetMin() int {
 	return h.elements[0]
 }
 
+// DeleteMin function
+func (h *MinHeap) DeleteMin() int {
+	if len(h.elements) == 0 {
+		return -1
+	}
+	min := h.elements[0]
+	h.elements[0] = h.elements[len(h.elements)-1]
+	h.elements = h.elements[:len(h.elements)-1]
+	h.heapifyDown(0)
+	return min
+}
+
 // HeapifyUp Algorithm
 func (h *MinHeap) heapifyUp(index int) {
 	for index > 0 {
@@ -73,7 +92,7 @@ func (h *MinHeap) heapifyDown(index int) {
 		smallest := index
 
 		if leftChild <= lastIndex && h.elements[leftChild] < h.elements[smallest] {
-			smallest = rightChild
+			smallest = leftChild
 		}
 		if rightChild <= lastIndex && h.elements[rightChild] < h.elements[smallest] {
 			smallest = rightChild
@@ -88,6 +107,46 @@ func (h *MinHeap) heapifyDown(index int) {
 }
 
 
+// Cookies function
+func cookies(k int, A []int) int {
+	h := &MinHeap{}
+
+	for _, sweetness := range A {
+		h.Insert(sweetness)
+	}
+
+	operations := 0
+	for len(h.elements) > 1 {
+		// Check if the smallest element is already greater than or equal to k
+		if h.elements[0] >= k {
+			return operations
+		}
+
+		// Remove the two least sweet cookies
+		first := h.DeleteMin()
+		second := h.DeleteMin()
+
+		// Combine them into a new cookie
+		newCookie := first + 2*second
+
+		// Insert the new cookie back into the heap
+		h.Insert(newCookie)
+
+		// Increment the operation count
+		operations++
+	}
+
+	// If the least sweet cookie is still less than k, return -1
+	if h.elements[0] < k {
+		return -1
+	}
+
+	return operations
+}
+
+// TEST SAMPLES
 func main() {
-	
+	k := 7
+	A := []int{1, 2, 3, 9, 10, 12}
+	fmt.Println(cookies(k, A)) // Output: 2
 }
