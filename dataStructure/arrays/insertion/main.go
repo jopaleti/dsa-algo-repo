@@ -19,7 +19,7 @@ func insertElement(slice []int, index int, value int) []int {
 	copy(newSlice, slice[:index])
 
 	// Insert the new element
-	slice[index] = value
+	newSlice[index] = value
 
 	// Copy elements after the index
 	copy(newSlice[index+1:], slice[index:])
