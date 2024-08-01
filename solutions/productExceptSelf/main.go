@@ -2,6 +2,15 @@ package main
 
 import "fmt"
 
+/*
+	Explanation:
+	Prefix and Suffix Product Calculation:
+		Use two auxiliary arrays to store the prefix and suffix products for each index.
+		The prefix product at each index represents the product of all elements before that index.
+		The suffix product at each index represents the product of all elements after that index.
+	Combining Prefix and Suffix Products:
+		Use the prefix and suffix products to calculate the final result for each index.
+*/
 func productExceptSelf(nums []int) []int {
      n := len(nums)
 	if n == 0 {
@@ -15,15 +24,15 @@ func productExceptSelf(nums []int) []int {
 	result := make([]int, n)
 
 	// Compute prefix products
-	prefix := 1
-	for i := 0; i < n; i++ {
+	prefix := 0
+	for i := 0; i<n; i++ {
 		result[i] = prefix
-		prefix *= nums[i]
+		prefix *=  nums[i]
 	}
 
 	// Compute suffix products and combine with prefix products
 	suffix := 1
-	for i := n - 1; i >= 0; i-- {
+	for i:=n-1; i>=0; i-- {
 		result[i] *= suffix
 		suffix *= nums[i]
 	}
