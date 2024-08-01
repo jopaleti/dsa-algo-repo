@@ -16,6 +16,8 @@ func canJump(nums []int) bool {
 		if i > farthest {
 			return false
 		}
+
+		// i + nums[i] == means adding index of an element to it
 		farthest = max(farthest, i+nums[i])
 		if farthest >= len(nums)-1 {
 			return true
