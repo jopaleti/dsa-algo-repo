@@ -24,7 +24,7 @@ func productExceptSelf(nums []int) []int {
 	result := make([]int, n)
 
 	// Compute prefix products
-	prefix := 0
+	prefix := 1
 	for i := 0; i<n; i++ {
 		result[i] = prefix
 		prefix *=  nums[i]
